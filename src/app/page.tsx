@@ -14,52 +14,52 @@ export const metadata: Metadata = {
 }
 
 const FALLBACK_SERVICES = [
-  { _id: "1", slug: { current: "document-handling" }, icon: "📄", title: "Document Handling", tagline: "Estimates, invoices, work orders — automated and organized." },
-  { _id: "2", slug: { current: "scheduling" }, icon: "📅", title: "Scheduling Automation", tagline: "Stop playing phone tag. Let the calendar fill itself." },
-  { _id: "3", slug: { current: "workflow-audit" }, icon: "🔍", title: "Workflow Audit", tagline: "Find where your time and money are leaking out." },
-  { _id: "4", slug: { current: "tool-vendor-selection" }, icon: "🔧", title: "Tool & Vendor Selection", tagline: "Cut through the noise. Know what's actually worth buying." },
-  { _id: "5", slug: { current: "ai-tools" }, icon: "🤖", title: "Custom AI Tools", tagline: "Simple AI built for the way your business works." },
+  { _id: "1", slug: { current: "document-handling" }, title: "Document Handling", tagline: "Estimates, invoices, work orders — automated and organized so nothing falls through the cracks." },
+  { _id: "2", slug: { current: "scheduling" }, title: "Scheduling Automation", tagline: "Stop playing phone tag. Let customers book online and reminders send themselves." },
+  { _id: "3", slug: { current: "workflow-audit" }, title: "Workflow Audit", tagline: "We walk your operation end-to-end and find exactly where time and money leak out." },
+  { _id: "4", slug: { current: "tool-vendor-selection" }, title: "Tool & Vendor Selection", tagline: "Too many apps, too many options. We cut the noise and tell you what's actually worth buying." },
+  { _id: "5", slug: { current: "ai-tools" }, title: "Custom AI Tools", tagline: "Purpose-built AI for the way your business works — one tool, one job, done right." },
 ]
 
 const FALLBACK_CASES = [
-  { _id: "1", icon: "🔧", trade: "Plumbing", title: "Invoice Automation", challenge: "6+ hours a week creating invoices and chasing payments.", solution: "Auto-generate invoices from job completion, send reminders, track payment status.", result: "Billing time cut 80%" },
-  { _id: "2", icon: "❄️", trade: "HVAC", title: "Scheduling Bot", challenge: "Staff spending 2 hours a day booking and rescheduling appointments over the phone.", solution: "Online booking with auto-confirmation, reminders, and rescheduling — no staff needed.", result: "No-shows dropped 60%" },
-  { _id: "3", icon: "⚡", trade: "Electrical", title: "Lead Follow-Up", challenge: "Quote requests getting missed or followed up days too late.", solution: "Auto-respond to leads within 5 minutes, send quote reminders on a schedule.", result: "Conversion rate up 35%" },
-  { _id: "4", icon: "🏗️", trade: "General Contracting", title: "Digital Work Orders", challenge: "Job paperwork, photos, and notes scattered across texts, emails, and paper.", solution: "Digital work orders auto-populated from job details with photo capture and cloud storage.", result: "Zero lost documents" },
-  { _id: "5", icon: "🌿", trade: "Landscaping", title: "Review Collection", challenge: "Great work, but almost no Google reviews to show for it.", solution: "Automated review request sent 24 hours after every completed job.", result: "Rating went from 3.2 to 4.8" },
-  { _id: "6", icon: "🏠", trade: "Roofing", title: "Material Tracking", challenge: "Manually tracking material orders and vendor deliveries across jobs.", solution: "Purchase order automation with delivery tracking and low-stock alerts.", result: "Material costs down 12%" },
+  { _id: "1", trade: "Plumbing", title: "Invoice Automation", challenge: "6+ hours a week creating invoices and chasing payments.", solution: "Auto-generate invoices from job completion, send reminders, track payment status.", result: "80% less billing time" },
+  { _id: "2", trade: "HVAC", title: "Scheduling Bot", challenge: "Staff spending 2 hours a day booking and rescheduling over the phone.", solution: "Online booking with auto-confirmation, reminders, and rescheduling.", result: "60% fewer no-shows" },
+  { _id: "3", trade: "Electrical", title: "Lead Follow-Up", challenge: "Quote requests getting missed or followed up days too late.", solution: "Auto-respond to leads within 5 minutes, send quote reminders on a schedule.", result: "35% higher conversion" },
+  { _id: "4", trade: "General Contracting", title: "Digital Work Orders", challenge: "Job paperwork and photos scattered across texts, emails, and paper.", solution: "Digital work orders auto-populated from job details with cloud storage.", result: "Zero lost documents" },
+  { _id: "5", trade: "Landscaping", title: "Review Collection", challenge: "Great work but almost no Google reviews.", solution: "Automated review request sent 24 hours after every completed job.", result: "3.2 → 4.8 on Google" },
+  { _id: "6", trade: "Roofing", title: "Material Tracking", challenge: "Manually tracking material orders and vendor deliveries.", solution: "Purchase order automation with delivery tracking and alerts.", result: "Material costs down 12%" },
 ]
 
 const FALLBACK_STEPS = [
   { number: "01", title: "Free Audit", description: "We talk through how your business runs today — what's working, what's not, where the time goes." },
-  { number: "02", title: "Clear Plan", description: "We give you a plain-English rundown of exactly what to fix and how — no jargon, no sales pitch." },
+  { number: "02", title: "Clear Plan", description: "You get a plain-English breakdown of exactly what to fix and how. No jargon, no sales pitch." },
   { number: "03", title: "We Build It", description: "We handle the tech. You get a tighter operation. No long contracts, no maintenance headaches." },
 ]
 
-const FALLBACK_TRADES = ["Plumbers", "HVAC Techs", "Electricians", "Roofers", "Landscapers", "General Contractors", "Painters", "Handymen", "Welders", "Carpenters"]
+const STATS = [
+  { value: "40+", label: "hrs/month saved on average" },
+  { value: "20+", label: "tools in our tech stack" },
+  { value: "6+", label: "trades industries served" },
+  { value: "100%", label: "trades-focused" },
+]
 
 export default async function Home() {
-  const [page, services, caseStudies] = await Promise.all([
-    getHomePage(),
-    getServices(),
-    getCaseStudies(),
-  ])
+  const [page, services, caseStudies] = await Promise.all([getHomePage(), getServices(), getCaseStudies()])
 
   const hero = page?.hero
   const problem = page?.problem
   const hiw = page?.howItWorks
-  const trades = page?.trades
   const cta = page?.cta
 
   const displayServices = services.length > 0 ? services : FALLBACK_SERVICES
   const displayCases = caseStudies.length > 0 ? caseStudies : FALLBACK_CASES
   const displaySteps = hiw?.steps && hiw.steps.length > 0 ? hiw.steps : FALLBACK_STEPS
-  const displayTrades = trades?.list && trades.list.length > 0 ? trades.list : FALLBACK_TRADES
 
   return (
     <>
+      {/* Hero */}
       <ParallaxHero
-        badge={hero?.badge || "For the Trades"}
+        badge={hero?.badge || "Ops & AI for the Trades"}
         headline={hero?.headline || "Less paperwork."}
         headlineAccent={hero?.headlineAccent || "More jobs."}
         subheadline={hero?.subheadline || "We build simple automations for small trade businesses — so you spend less time on admin and more time doing the work that pays."}
@@ -67,21 +67,75 @@ export default async function Home() {
         secondaryCta={hero?.secondaryCta}
       />
 
-      <section className="bg-[#F8F8F8] py-20">
+      {/* Stats bar */}
+      <section className="bg-[#0f2237] border-b border-white/10">
+        <div className="max-w-6xl mx-auto px-6 py-8">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-0 md:divide-x md:divide-white/10">
+            {STATS.map((s) => (
+              <div key={s.label} className="text-center md:px-8">
+                <div className="text-3xl font-black text-[#F5C518]">{s.value}</div>
+                <div className="text-xs text-white/40 mt-1 font-medium uppercase tracking-wide">{s.label}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Positioning — bridge section */}
+      <section className="bg-white py-24">
+        <div className="max-w-6xl mx-auto px-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+            <AnimateIn direction="left">
+              <p className="text-xs font-bold uppercase tracking-widest text-[#F5C518] mb-4">Why Punch List</p>
+              <h2 className="text-4xl md:text-5xl font-black text-[#1B3A5C] leading-tight mb-6">
+                We speak trades.<br />We speak tech.
+              </h2>
+              <p className="text-[#6B7280] text-lg leading-relaxed mb-6">
+                Most tech companies don't understand how a trade business actually runs. And most trade consultants don't know what's possible with today's AI tools.
+              </p>
+              <p className="text-[#6B7280] text-lg leading-relaxed">
+                We sit at the intersection. We've mapped the workflows, learned the pain points, and built the automations — for plumbers, HVAC techs, electricians, roofers, and more.
+              </p>
+            </AnimateIn>
+            <AnimateIn direction="right">
+              <div className="space-y-4">
+                {[
+                  { label: "Trade expertise", desc: "We know how jobs flow, how estimating works, how dispatch happens." },
+                  { label: "Modern AI stack", desc: "Claude, Make, N8N, Zapier — we know what to use and when." },
+                  { label: "No-fluff delivery", desc: "Small engagements. Clear outcomes. No 12-week consulting contracts." },
+                  { label: "Owner-to-owner", desc: "We run a small business too. We get what the pressure feels like." },
+                ].map((item, i) => (
+                  <div key={i} className="flex gap-4 p-4 rounded-lg border border-[#E5E7EB] hover:border-[#F5C518] transition-colors">
+                    <div className="w-2 h-2 rounded-full bg-[#F5C518] mt-2 shrink-0" />
+                    <div>
+                      <div className="font-black text-[#1B3A5C] mb-0.5">{item.label}</div>
+                      <div className="text-[#6B7280] text-sm">{item.desc}</div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </AnimateIn>
+          </div>
+        </div>
+      </section>
+
+      {/* Problem */}
+      <section className="bg-[#0f2237] py-20">
         <div className="max-w-6xl mx-auto px-6">
           <AnimateIn>
-            <div className="max-w-2xl">
-              <h2 className="text-3xl md:text-4xl font-black text-[#1B3A5C] mb-6">
-                {problem?.headline || "You didn\'t start a business to push paper."}
+            <div className="max-w-3xl">
+              <p className="text-xs font-bold uppercase tracking-widest text-[#F5C518] mb-4">Sound familiar?</p>
+              <h2 className="text-3xl md:text-4xl font-black text-white mb-6">
+                {problem?.headline || "You didn't start a business to push paper."}
               </h2>
               {problem?.body ? (
-                <div className="text-[#6B7280] text-lg leading-relaxed space-y-4 prose prose-lg max-w-none">
+                <div className="text-white/60 text-lg leading-relaxed prose prose-lg max-w-none prose-invert">
                   <PortableText value={problem.body as never} />
                 </div>
               ) : (
-                <div className="space-y-4 text-[#6B7280] text-lg leading-relaxed">
+                <div className="space-y-4 text-white/60 text-lg leading-relaxed">
                   <p>But somewhere between answering calls, sending estimates, chasing invoices, scheduling jobs, and managing vendors — the back office starts eating your day.</p>
-                  <p>We are not a software company. We are a small shop that understands how trade businesses run — and we use technology as a tool to make yours run tighter.</p>
+                  <p>You're running the tools when the tools should be running themselves. That's what we fix.</p>
                 </div>
               )}
             </div>
@@ -89,27 +143,33 @@ export default async function Home() {
         </div>
       </section>
 
-      <div className="h-64 bg-cover bg-center bg-fixed relative" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=1920&q=80')" }}>
-        <div className="absolute inset-0 bg-[#1B3A5C]/70" />
+      {/* Photo break */}
+      <div className="h-56 bg-cover bg-center bg-fixed relative" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=1920&q=80')" }}>
+        <div className="absolute inset-0 bg-[#1B3A5C]/75" />
         <div className="relative z-10 h-full flex items-center justify-center">
           <p className="text-white text-2xl md:text-3xl font-black text-center px-6">Built for the shop, not the boardroom.</p>
         </div>
       </div>
 
-      <section className="bg-white py-20">
+      {/* Services */}
+      <section className="bg-[#F8F8F8] py-24">
         <div className="max-w-6xl mx-auto px-6">
           <AnimateIn>
-            <div className="mb-12">
-              <h2 className="text-3xl md:text-4xl font-black text-[#1B3A5C] mb-3">What we do</h2>
-              <p className="text-[#6B7280] text-lg">No bloat. No enterprise software. Just fixes that work.</p>
+            <div className="mb-14">
+              <p className="text-xs font-bold uppercase tracking-widest text-[#F5C518] mb-3">What we do</p>
+              <h2 className="text-3xl md:text-4xl font-black text-[#1B3A5C] mb-3">Five ways we fix your operation</h2>
+              <p className="text-[#6B7280] text-lg max-w-xl">No bloat. No enterprise software. Fixes that actually stick.</p>
             </div>
           </AnimateIn>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {displayServices.map((s, i) => (
-              <AnimateIn key={s._id} delay={i * 0.07}>
-                <Link href={`/services/${s.slug.current}`} className="block border border-[#E5E7EB] rounded-lg p-6 hover:border-[#F5C518] hover:shadow-md transition-all group h-full">
-                  {s.icon && <div className="text-3xl mb-4">{s.icon}</div>}
-                  <h3 className="font-bold text-[#1B3A5C] text-lg mb-2 group-hover:text-[#F5C518] transition-colors">{s.title}</h3>
+              <AnimateIn key={s._id} delay={i * 0.06}>
+                <Link href={`/services/${s.slug.current}`} className="group block bg-white border border-[#E5E7EB] rounded-xl p-7 hover:border-[#1B3A5C] hover:shadow-lg transition-all h-full">
+                  <div className="flex items-start justify-between mb-4">
+                    <span className="text-xs font-black text-[#1B3A5C]/30 uppercase tracking-widest">0{i + 1}</span>
+                    <span className="text-[#E5E7EB] group-hover:text-[#F5C518] transition-colors font-bold text-lg">→</span>
+                  </div>
+                  <h3 className="font-black text-[#1B3A5C] text-lg mb-2 group-hover:text-[#1B3A5C]">{s.title}</h3>
                   {s.tagline && <p className="text-[#6B7280] text-sm leading-relaxed">{s.tagline}</p>}
                 </Link>
               </AnimateIn>
@@ -118,30 +178,27 @@ export default async function Home() {
         </div>
       </section>
 
-      <section className="bg-[#1B3A5C] py-20">
+      {/* Work We've Done */}
+      <section className="bg-[#1B3A5C] py-24">
         <div className="max-w-6xl mx-auto px-6">
           <AnimateIn>
-            <div className="mb-12">
-              <h2 className="text-3xl md:text-4xl font-black text-white mb-3">Work we have done</h2>
-              <p className="text-[#a0b4c8] text-lg">Real automations built for real trade businesses.</p>
+            <div className="mb-14">
+              <p className="text-xs font-bold uppercase tracking-widest text-[#F5C518] mb-3">Proof of work</p>
+              <h2 className="text-3xl md:text-4xl font-black text-white mb-3">Work we've done</h2>
+              <p className="text-white/50 text-lg">Real automations. Real results.</p>
             </div>
           </AnimateIn>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {displayCases.map((c, i) => (
-              <AnimateIn key={c._id} delay={i * 0.07}>
-                <div className="bg-white/5 border border-white/10 rounded-lg p-6 hover:bg-white/10 transition-colors h-full">
-                  <div className="flex items-start justify-between mb-4">
-                    <div>
-                      {c.icon && <div className="text-2xl mb-1">{c.icon}</div>}
-                      <span className="text-[#F5C518] text-xs font-bold uppercase tracking-wide">{c.trade}</span>
-                    </div>
-                    {c.result && (
-                      <span className="bg-[#F5C518] text-[#1B3A5C] text-xs font-black px-2 py-1 rounded whitespace-nowrap ml-2">{c.result}</span>
-                    )}
+              <AnimateIn key={c._id} delay={i * 0.06}>
+                <div className="bg-white/5 border border-white/10 rounded-xl p-6 hover:bg-white/8 transition-colors h-full flex flex-col">
+                  <div className="flex items-center justify-between mb-4">
+                    <span className="text-[10px] font-black text-[#F5C518] uppercase tracking-widest border border-[#F5C518]/30 px-2 py-0.5 rounded">{c.trade}</span>
+                    {c.result && <span className="text-[10px] font-black text-white/80 bg-white/10 px-2 py-0.5 rounded">{c.result}</span>}
                   </div>
                   <h3 className="font-black text-white text-lg mb-3">{c.title}</h3>
-                  {c.challenge && <p className="text-[#a0b4c8] text-sm mb-2"><span className="font-semibold text-white/70">Problem: </span>{c.challenge}</p>}
-                  {c.solution && <p className="text-[#a0b4c8] text-sm"><span className="font-semibold text-white/70">Solution: </span>{c.solution}</p>}
+                  {c.challenge && <p className="text-white/40 text-sm mb-2 leading-relaxed"><span className="text-white/60 font-semibold">Problem: </span>{c.challenge}</p>}
+                  {c.solution && <p className="text-white/40 text-sm leading-relaxed mt-auto pt-3 border-t border-white/10"><span className="text-white/60 font-semibold">Built: </span>{c.solution}</p>}
                 </div>
               </AnimateIn>
             ))}
@@ -149,20 +206,20 @@ export default async function Home() {
         </div>
       </section>
 
-      <section className="bg-[#F8F8F8] py-20">
+      {/* How It Works */}
+      <section className="bg-white py-24">
         <div className="max-w-6xl mx-auto px-6">
           <AnimateIn>
-            <h2 className="text-3xl md:text-4xl font-black text-[#1B3A5C] mb-12">{hiw?.headline || "How it works"}</h2>
+            <p className="text-xs font-bold uppercase tracking-widest text-[#F5C518] mb-3">The process</p>
+            <h2 className="text-3xl md:text-4xl font-black text-[#1B3A5C] mb-14">{hiw?.headline || "Simple. Fast. No fluff."}</h2>
           </AnimateIn>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {displaySteps.map((step, i) => (
               <AnimateIn key={step.number} delay={i * 0.1}>
-                <div className="flex gap-5">
-                  <div className="text-[#F5C518] font-black text-3xl leading-none">{step.number}</div>
-                  <div>
-                    <h3 className="font-bold text-[#1B3A5C] text-lg mb-2">{step.title}</h3>
-                    <p className="text-[#6B7280] text-sm leading-relaxed">{step.description}</p>
-                  </div>
+                <div className="relative">
+                  <div className="text-6xl font-black text-[#F5F5F0] mb-4 leading-none">{step.number}</div>
+                  <h3 className="font-black text-[#1B3A5C] text-xl mb-3">{step.title}</h3>
+                  <p className="text-[#6B7280] text-sm leading-relaxed">{step.description}</p>
                 </div>
               </AnimateIn>
             ))}
@@ -170,8 +227,10 @@ export default async function Home() {
         </div>
       </section>
 
+      {/* Tech Logos */}
       <TechLogos />
 
+      {/* Photo break */}
       <div className="h-56 bg-cover bg-center bg-fixed relative" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1621905252507-b35492cc74b4?auto=format&fit=crop&w=1920&q=80')" }}>
         <div className="absolute inset-0 bg-[#1B3A5C]/75" />
         <div className="relative z-10 h-full flex items-center justify-center">
@@ -179,26 +238,26 @@ export default async function Home() {
         </div>
       </div>
 
-      <section className="bg-white py-20">
-        <div className="max-w-6xl mx-auto px-6">
+      {/* CTA */}
+      <section className="bg-[#0f2237] py-24 relative overflow-hidden">
+        <div className="absolute inset-0 opacity-10" style={{ backgroundImage: "linear-gradient(rgba(245,197,24,.3) 1px, transparent 1px), linear-gradient(90deg, rgba(245,197,24,.3) 1px, transparent 1px)", backgroundSize: "60px 60px" }} />
+        <div className="relative z-10 max-w-6xl mx-auto px-6 text-center">
           <AnimateIn>
-            <h2 className="text-3xl md:text-4xl font-black text-[#1B3A5C] mb-3">{trades?.headline || "Built for the trades"}</h2>
-            <p className="text-[#6B7280] text-lg mb-10">{trades?.subheadline || "If you work with your hands, we work with you."}</p>
-            <div className="flex flex-wrap gap-3">
-              {displayTrades.map((t) => (
-                <span key={t} className="bg-[#F8F8F8] border border-[#E5E7EB] text-[#1B3A5C] font-semibold px-5 py-2 rounded-full text-sm hover:border-[#F5C518] transition-colors">{t}</span>
-              ))}
+            <p className="text-xs font-bold uppercase tracking-widest text-[#F5C518] mb-4">Get started</p>
+            <h2 className="text-3xl md:text-5xl font-black text-white mb-4">
+              {cta?.headline || "Ready to clear your punch list?"}
+            </h2>
+            <p className="text-white/50 text-lg mb-10 max-w-xl mx-auto">
+              {cta?.body || "Start with a free 30-minute audit. We walk through your operation, find the leaks, and tell you exactly what to fix — no obligation."}
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Link href="/contact" className="inline-block bg-[#F5C518] text-[#1B3A5C] font-black px-10 py-4 rounded uppercase tracking-wide hover:bg-white transition-colors text-sm">
+                {cta?.buttonText || "Book Your Free Audit"}
+              </Link>
+              <Link href="/services" className="inline-block border border-white/20 text-white/70 font-semibold px-10 py-4 rounded hover:border-white hover:text-white transition-colors text-sm">
+                See All Services
+              </Link>
             </div>
-          </AnimateIn>
-        </div>
-      </section>
-
-      <section className="bg-[#F5C518] py-20">
-        <div className="max-w-6xl mx-auto px-6 text-center">
-          <AnimateIn>
-            <h2 className="text-3xl md:text-4xl font-black text-[#1B3A5C] mb-4">{cta?.headline || "Ready to clear your punch list?"}</h2>
-            <p className="text-[#2a5280] text-lg mb-8">{cta?.body || "Start with a free 30-minute audit. No commitment, no pitch — just honest advice."}</p>
-            <Link href="/contact" className="inline-block bg-[#1B3A5C] text-white font-bold px-10 py-4 rounded text-lg hover:bg-[#122840] transition-colors">{cta?.buttonText || "Book Your Free Audit"}</Link>
           </AnimateIn>
         </div>
       </section>
