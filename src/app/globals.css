@@ -9,7 +9,7 @@
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-navy: #1B3A5C;
-  --color-navy-dark: #122840;
+  --color-navy-dark: #0f2237;
   --color-yellow: #F5C518;
   --color-yellow-dark: #D4A800;
   --color-offwhite: #F8F8F8;
@@ -26,15 +26,34 @@ body {
   font-family: var(--font-sans), Arial, Helvetica, sans-serif;
 }
 
-* {
-  box-sizing: border-box;
-}
+* { box-sizing: border-box; }
 
+/* Marquee */
 @keyframes marquee {
   from { transform: translateX(0); }
-  to { transform: translateX(-50%); }
+  to   { transform: translateX(-50%); }
+}
+.animate-marquee {
+  animation: marquee 35s linear infinite;
+}
+.animate-marquee:hover {
+  animation-play-state: paused;
 }
 
-.animate-marquee {
-  animation: marquee 30s linear infinite;
+/* Dot grid for light sections */
+.dot-grid {
+  background-image: radial-gradient(circle, rgba(27,58,92,0.07) 1px, transparent 1px);
+  background-size: 22px 22px;
 }
+
+/* Fine line grid for dark sections */
+.line-grid {
+  background-image:
+    linear-gradient(rgba(245,197,24,0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(245,197,24,0.08) 1px, transparent 1px);
+  background-size: 60px 60px;
+}
+
+/* Glow utilities */
+.glow-yellow { box-shadow: 0 0 40px rgba(245,197,24,0.25), 0 0 80px rgba(245,197,24,0.10); }
+.glow-navy   { box-shadow: 0 0 40px rgba(27,58,92,0.20); }

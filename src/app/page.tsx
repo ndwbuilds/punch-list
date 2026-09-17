@@ -9,60 +9,60 @@ import TechLogos from "@/components/TechLogos"
 export const revalidate = 60
 
 export const metadata: Metadata = {
-  title: "Punch List — Less paperwork. More jobs.",
-  description: "Punch List builds simple automations for small trade businesses — so you spend less time on admin and more time doing the work that pays.",
+  title: "Punch List | Less paperwork. More jobs.",
+  description: "Punch List builds simple automations for small trade businesses so you spend less time on admin and more time doing the work that pays.",
 }
 
 const FALLBACK_SERVICES = [
-  { _id: "1", slug: { current: "document-handling" }, title: "Document Handling", tagline: "Estimates, invoices, work orders — automated and organized so nothing falls through the cracks." },
-  { _id: "2", slug: { current: "scheduling" }, title: "Scheduling Automation", tagline: "Stop playing phone tag. Let customers book online and reminders send themselves." },
-  { _id: "3", slug: { current: "workflow-audit" }, title: "Workflow Audit", tagline: "We walk your operation end-to-end and find exactly where time and money leak out." },
-  { _id: "4", slug: { current: "tool-vendor-selection" }, title: "Tool & Vendor Selection", tagline: "Too many apps, too many options. We cut the noise and tell you what's actually worth buying." },
-  { _id: "5", slug: { current: "ai-tools" }, title: "Custom AI Tools", tagline: "Purpose-built AI for the way your business works — one tool, one job, done right." },
+  { _id: "1", slug: { current: "document-handling" }, title: "Document Handling", tagline: "Estimates, invoices, work orders automated and organized so nothing falls through the cracks." },
+  { _id: "2", slug: { current: "scheduling" }, title: "Scheduling Automation", tagline: "Stop playing phone tag. Let customers book online and let reminders send themselves." },
+  { _id: "3", slug: { current: "workflow-audit" }, title: "Workflow Audit", tagline: "We walk your operation end to end and find exactly where time and money leak out." },
+  { _id: "4", slug: { current: "tool-vendor-selection" }, title: "Tool and Vendor Selection", tagline: "Too many apps and too many options. We cut through the noise and tell you what is worth buying." },
+  { _id: "5", slug: { current: "ai-tools" }, title: "Custom AI Tools", tagline: "Purpose-built AI for the way your business works. One tool, one job, done right." },
 ]
 
 const FALLBACK_CASES = [
-  { _id: "1", trade: "Plumbing", title: "Invoice Automation", challenge: "6+ hours a week creating invoices and chasing payments.", solution: "Auto-generate invoices from job completion, send reminders, track payment status.", result: "80% less billing time" },
+  { _id: "1", trade: "Plumbing", title: "Invoice Automation", challenge: "6 hours a week creating invoices and chasing payments.", solution: "Auto-generate invoices from job completion, send reminders, and track payment status.", result: "80% less billing time" },
   { _id: "2", trade: "HVAC", title: "Scheduling Bot", challenge: "Staff spending 2 hours a day booking and rescheduling over the phone.", solution: "Online booking with auto-confirmation, reminders, and rescheduling.", result: "60% fewer no-shows" },
-  { _id: "3", trade: "Electrical", title: "Lead Follow-Up", challenge: "Quote requests getting missed or followed up days too late.", solution: "Auto-respond to leads within 5 minutes, send quote reminders on a schedule.", result: "35% higher conversion" },
+  { _id: "3", trade: "Electrical", title: "Lead Follow-Up", challenge: "Quote requests getting missed or followed up days too late.", solution: "Auto-respond to leads within 5 minutes and send quote reminders on a schedule.", result: "35% higher conversion" },
   { _id: "4", trade: "General Contracting", title: "Digital Work Orders", challenge: "Job paperwork and photos scattered across texts, emails, and paper.", solution: "Digital work orders auto-populated from job details with cloud storage.", result: "Zero lost documents" },
-  { _id: "5", trade: "Landscaping", title: "Review Collection", challenge: "Great work but almost no Google reviews.", solution: "Automated review request sent 24 hours after every completed job.", result: "3.2 → 4.8 on Google" },
-  { _id: "6", trade: "Roofing", title: "Material Tracking", challenge: "Manually tracking material orders and vendor deliveries.", solution: "Purchase order automation with delivery tracking and alerts.", result: "Material costs down 12%" },
+  { _id: "5", trade: "Landscaping", title: "Review Collection", challenge: "Great work but almost no Google reviews.", solution: "Automated review request sent 24 hours after every completed job.", result: "3.2 to 4.8 on Google" },
+  { _id: "6", trade: "Roofing", title: "Material Tracking", challenge: "Manually tracking material orders and vendor deliveries across jobs.", solution: "Purchase order automation with delivery tracking and low-stock alerts.", result: "Material costs down 12%" },
 ]
 
 const FALLBACK_STEPS = [
-  { number: "01", title: "Free Audit", description: "We talk through how your business runs today — what's working, what's not, where the time goes." },
-  { number: "02", title: "Clear Plan", description: "You get a plain-English breakdown of exactly what to fix and how. No jargon, no sales pitch." },
-  { number: "03", title: "We Build It", description: "We handle the tech. You get a tighter operation. No long contracts, no maintenance headaches." },
+  { number: "01", title: "Free Audit", description: "We talk through how your business runs today, what is working, what is not, and where the time goes." },
+  { number: "02", title: "Clear Plan", description: "You get a plain-English breakdown of exactly what to fix and how. No jargon and no sales pitch." },
+  { number: "03", title: "We Build It", description: "We handle the tech. You get a tighter operation. No long contracts and no maintenance headaches." },
 ]
 
 const STATS = [
-  { value: "40+", label: "hrs/month saved on average" },
-  { value: "20+", label: "tools in our tech stack" },
-  { value: "6+", label: "trades industries served" },
-  { value: "100%", label: "trades-focused" },
+  { value: "40+",  label: "hrs/month saved on average" },
+  { value: "20+",  label: "tools in our tech stack" },
+  { value: "6+",   label: "trade industries served" },
+  { value: "100%", label: "trades focused" },
 ]
 
 export default async function Home() {
   const [page, services, caseStudies] = await Promise.all([getHomePage(), getServices(), getCaseStudies()])
 
-  const hero = page?.hero
-  const problem = page?.problem
-  const hiw = page?.howItWorks
-  const cta = page?.cta
+  const hero       = page?.hero
+  const problem    = page?.problem
+  const hiw        = page?.howItWorks
+  const cta        = page?.cta
 
-  const displayServices = services.length > 0 ? services : FALLBACK_SERVICES
-  const displayCases = caseStudies.length > 0 ? caseStudies : FALLBACK_CASES
-  const displaySteps = hiw?.steps && hiw.steps.length > 0 ? hiw.steps : FALLBACK_STEPS
+  const displayServices  = services.length    > 0 ? services    : FALLBACK_SERVICES
+  const displayCases     = caseStudies.length > 0 ? caseStudies : FALLBACK_CASES
+  const displaySteps     = (hiw?.steps && hiw.steps.length > 0) ? hiw.steps : FALLBACK_STEPS
 
   return (
     <>
       {/* Hero */}
       <ParallaxHero
-        badge={hero?.badge || "Ops & AI for the Trades"}
+        badge={hero?.badge || "Ops and AI for the Trades"}
         headline={hero?.headline || "Less paperwork."}
         headlineAccent={hero?.headlineAccent || "More jobs."}
-        subheadline={hero?.subheadline || "We build simple automations for small trade businesses — so you spend less time on admin and more time doing the work that pays."}
+        subheadline={hero?.subheadline || "We build simple automations for small trade businesses so you spend less time on admin and more time doing the work that pays."}
         primaryCta={hero?.primaryCta}
         secondaryCta={hero?.secondaryCta}
       />
@@ -73,7 +73,7 @@ export default async function Home() {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-0 md:divide-x md:divide-white/10">
             {STATS.map((s) => (
               <div key={s.label} className="text-center md:px-8">
-                <div className="text-3xl font-black text-[#F5C518]">{s.value}</div>
+                <div className="text-3xl font-black text-[#F5C518] glow-yellow">{s.value}</div>
                 <div className="text-xs text-white/40 mt-1 font-medium uppercase tracking-wide">{s.label}</div>
               </div>
             ))}
@@ -81,8 +81,8 @@ export default async function Home() {
         </div>
       </section>
 
-      {/* Positioning — bridge section */}
-      <section className="bg-white py-24">
+      {/* Positioning */}
+      <section className="bg-white dot-grid py-24">
         <div className="max-w-6xl mx-auto px-6">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
             <AnimateIn direction="left">
@@ -90,26 +90,26 @@ export default async function Home() {
               <h2 className="text-4xl md:text-5xl font-black text-[#1B3A5C] leading-tight mb-6">
                 We speak trades.<br />We speak tech.
               </h2>
-              <p className="text-[#6B7280] text-lg leading-relaxed mb-6">
-                Most tech companies don't understand how a trade business actually runs. And most trade consultants don't know what's possible with today's AI tools.
+              <p className="text-[#6B7280] text-lg leading-relaxed mb-4">
+                Most tech companies do not understand how a trade business actually runs. Most trade consultants do not know what is possible with today's AI tools.
               </p>
               <p className="text-[#6B7280] text-lg leading-relaxed">
-                We sit at the intersection. We've mapped the workflows, learned the pain points, and built the automations — for plumbers, HVAC techs, electricians, roofers, and more.
+                We sit at the intersection. We have mapped the workflows, learned the pain points, and built the automations for plumbers, HVAC techs, electricians, roofers, and more.
               </p>
             </AnimateIn>
             <AnimateIn direction="right">
-              <div className="space-y-4">
+              <div className="space-y-3">
                 {[
-                  { label: "Trade expertise", desc: "We know how jobs flow, how estimating works, how dispatch happens." },
-                  { label: "Modern AI stack", desc: "Claude, Make, N8N, Zapier — we know what to use and when." },
+                  { label: "Trade expertise", desc: "We know how jobs flow, how estimating works, and how dispatch happens." },
+                  { label: "Modern AI stack", desc: "Claude, Make, N8N, Zapier. We know what to use and when to use it." },
                   { label: "No-fluff delivery", desc: "Small engagements. Clear outcomes. No 12-week consulting contracts." },
-                  { label: "Owner-to-owner", desc: "We run a small business too. We get what the pressure feels like." },
+                  { label: "Owner to owner", desc: "We run a small business too. We get what the pressure feels like." },
                 ].map((item, i) => (
-                  <div key={i} className="flex gap-4 p-4 rounded-lg border border-[#E5E7EB] hover:border-[#F5C518] transition-colors">
-                    <div className="w-2 h-2 rounded-full bg-[#F5C518] mt-2 shrink-0" />
+                  <div key={i} className="flex gap-4 p-5 rounded-xl bg-white border border-[#E5E7EB] hover:border-[#1B3A5C] hover:shadow-md transition-all group">
+                    <div className="w-2 h-2 rounded-full bg-[#F5C518] mt-1.5 shrink-0" />
                     <div>
                       <div className="font-black text-[#1B3A5C] mb-0.5">{item.label}</div>
-                      <div className="text-[#6B7280] text-sm">{item.desc}</div>
+                      <div className="text-[#6B7280] text-sm leading-relaxed">{item.desc}</div>
                     </div>
                   </div>
                 ))}
@@ -120,13 +120,13 @@ export default async function Home() {
       </section>
 
       {/* Problem */}
-      <section className="bg-[#0f2237] py-20">
+      <section className="bg-[#0f2237] line-grid py-20">
         <div className="max-w-6xl mx-auto px-6">
           <AnimateIn>
             <div className="max-w-3xl">
               <p className="text-xs font-bold uppercase tracking-widest text-[#F5C518] mb-4">Sound familiar?</p>
               <h2 className="text-3xl md:text-4xl font-black text-white mb-6">
-                {problem?.headline || "You didn't start a business to push paper."}
+                {problem?.headline || "You did not start a business to push paper."}
               </h2>
               {problem?.body ? (
                 <div className="text-white/60 text-lg leading-relaxed prose prose-lg max-w-none prose-invert">
@@ -134,8 +134,8 @@ export default async function Home() {
                 </div>
               ) : (
                 <div className="space-y-4 text-white/60 text-lg leading-relaxed">
-                  <p>But somewhere between answering calls, sending estimates, chasing invoices, scheduling jobs, and managing vendors — the back office starts eating your day.</p>
-                  <p>You're running the tools when the tools should be running themselves. That's what we fix.</p>
+                  <p>But somewhere between answering calls, sending estimates, chasing invoices, and scheduling jobs, the back office starts eating your day.</p>
+                  <p>You are running the tools when the tools should be running themselves. That is what we fix.</p>
                 </div>
               )}
             </div>
@@ -152,7 +152,7 @@ export default async function Home() {
       </div>
 
       {/* Services */}
-      <section className="bg-[#F8F8F8] py-24">
+      <section className="bg-[#F8F8F8] dot-grid py-24">
         <div className="max-w-6xl mx-auto px-6">
           <AnimateIn>
             <div className="mb-14">
@@ -165,11 +165,11 @@ export default async function Home() {
             {displayServices.map((s, i) => (
               <AnimateIn key={s._id} delay={i * 0.06}>
                 <Link href={`/services/${s.slug.current}`} className="group block bg-white border border-[#E5E7EB] rounded-xl p-7 hover:border-[#1B3A5C] hover:shadow-lg transition-all h-full">
-                  <div className="flex items-start justify-between mb-4">
-                    <span className="text-xs font-black text-[#1B3A5C]/30 uppercase tracking-widest">0{i + 1}</span>
-                    <span className="text-[#E5E7EB] group-hover:text-[#F5C518] transition-colors font-bold text-lg">→</span>
+                  <div className="flex items-start justify-between mb-5">
+                    <span className="text-xs font-black text-[#1B3A5C]/25 uppercase tracking-widest">0{i + 1}</span>
+                    <span className="text-[#E5E7EB] group-hover:text-[#F5C518] transition-colors font-bold text-xl leading-none">→</span>
                   </div>
-                  <h3 className="font-black text-[#1B3A5C] text-lg mb-2 group-hover:text-[#1B3A5C]">{s.title}</h3>
+                  <h3 className="font-black text-[#1B3A5C] text-lg mb-2">{s.title}</h3>
                   {s.tagline && <p className="text-[#6B7280] text-sm leading-relaxed">{s.tagline}</p>}
                 </Link>
               </AnimateIn>
@@ -178,13 +178,13 @@ export default async function Home() {
         </div>
       </section>
 
-      {/* Work We've Done */}
+      {/* Work Done */}
       <section className="bg-[#1B3A5C] py-24">
         <div className="max-w-6xl mx-auto px-6">
           <AnimateIn>
             <div className="mb-14">
               <p className="text-xs font-bold uppercase tracking-widest text-[#F5C518] mb-3">Proof of work</p>
-              <h2 className="text-3xl md:text-4xl font-black text-white mb-3">Work we've done</h2>
+              <h2 className="text-3xl md:text-4xl font-black text-white mb-3">Work we have done</h2>
               <p className="text-white/50 text-lg">Real automations. Real results.</p>
             </div>
           </AnimateIn>
@@ -197,7 +197,7 @@ export default async function Home() {
                     {c.result && <span className="text-[10px] font-black text-white/80 bg-white/10 px-2 py-0.5 rounded">{c.result}</span>}
                   </div>
                   <h3 className="font-black text-white text-lg mb-3">{c.title}</h3>
-                  {c.challenge && <p className="text-white/40 text-sm mb-2 leading-relaxed"><span className="text-white/60 font-semibold">Problem: </span>{c.challenge}</p>}
+                  {c.challenge && <p className="text-white/40 text-sm mb-3 leading-relaxed"><span className="text-white/60 font-semibold">Problem: </span>{c.challenge}</p>}
                   {c.solution && <p className="text-white/40 text-sm leading-relaxed mt-auto pt-3 border-t border-white/10"><span className="text-white/60 font-semibold">Built: </span>{c.solution}</p>}
                 </div>
               </AnimateIn>
@@ -207,17 +207,20 @@ export default async function Home() {
       </section>
 
       {/* How It Works */}
-      <section className="bg-white py-24">
+      <section className="bg-white dot-grid py-24">
         <div className="max-w-6xl mx-auto px-6">
           <AnimateIn>
             <p className="text-xs font-bold uppercase tracking-widest text-[#F5C518] mb-3">The process</p>
             <h2 className="text-3xl md:text-4xl font-black text-[#1B3A5C] mb-14">{hiw?.headline || "Simple. Fast. No fluff."}</h2>
           </AnimateIn>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
             {displaySteps.map((step, i) => (
               <AnimateIn key={step.number} delay={i * 0.1}>
-                <div className="relative">
-                  <div className="text-6xl font-black text-[#F5F5F0] mb-4 leading-none">{step.number}</div>
+                <div className="relative pl-6 border-l-2 border-[#E5E7EB]">
+                  <div className="absolute -left-3 top-0 w-6 h-6 rounded-full bg-[#F5C518] glow-yellow flex items-center justify-center">
+                    <span className="text-[10px] font-black text-[#1B3A5C]">{i + 1}</span>
+                  </div>
+                  <p className="text-xs font-black text-[#1B3A5C]/30 uppercase tracking-widest mb-2">{step.number}</p>
                   <h3 className="font-black text-[#1B3A5C] text-xl mb-3">{step.title}</h3>
                   <p className="text-[#6B7280] text-sm leading-relaxed">{step.description}</p>
                 </div>
@@ -239,8 +242,7 @@ export default async function Home() {
       </div>
 
       {/* CTA */}
-      <section className="bg-[#0f2237] py-24 relative overflow-hidden">
-        <div className="absolute inset-0 opacity-10" style={{ backgroundImage: "linear-gradient(rgba(245,197,24,.3) 1px, transparent 1px), linear-gradient(90deg, rgba(245,197,24,.3) 1px, transparent 1px)", backgroundSize: "60px 60px" }} />
+      <section className="bg-[#0f2237] line-grid py-24 relative overflow-hidden">
         <div className="relative z-10 max-w-6xl mx-auto px-6 text-center">
           <AnimateIn>
             <p className="text-xs font-bold uppercase tracking-widest text-[#F5C518] mb-4">Get started</p>
@@ -248,10 +250,10 @@ export default async function Home() {
               {cta?.headline || "Ready to clear your punch list?"}
             </h2>
             <p className="text-white/50 text-lg mb-10 max-w-xl mx-auto">
-              {cta?.body || "Start with a free 30-minute audit. We walk through your operation, find the leaks, and tell you exactly what to fix — no obligation."}
+              {cta?.body || "Start with a free 30-minute audit. We walk through your operation, find the leaks, and tell you exactly what to fix with no obligation."}
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link href="/contact" className="inline-block bg-[#F5C518] text-[#1B3A5C] font-black px-10 py-4 rounded uppercase tracking-wide hover:bg-white transition-colors text-sm">
+              <Link href="/contact" className="inline-block bg-[#F5C518] text-[#1B3A5C] font-black px-10 py-4 rounded uppercase tracking-wide hover:bg-white transition-colors text-sm glow-yellow">
                 {cta?.buttonText || "Book Your Free Audit"}
               </Link>
               <Link href="/services" className="inline-block border border-white/20 text-white/70 font-semibold px-10 py-4 rounded hover:border-white hover:text-white transition-colors text-sm">
