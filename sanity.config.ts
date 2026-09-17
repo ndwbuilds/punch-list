@@ -28,6 +28,7 @@ export default defineConfig({
             ),
             S.divider(),
             S.documentTypeListItem('service').title('Services'),
+            S.documentTypeListItem('caseStudy').title('Work We\'ve Done'),
             S.documentTypeListItem('post').title('Blog Posts'),
           ]),
     }),

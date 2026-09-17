@@ -104,3 +104,18 @@ export const getPost = (slug: string) =>
     `*[_type == post && slug.current == $slug][0]`,
     { slug }
   )
+
+export type CaseStudy = {
+  _id: string
+  title: string
+  trade?: string
+  icon?: string
+  challenge?: string
+  solution?: string
+  result?: string
+}
+
+export const getCaseStudies = () =>
+  client.fetch<CaseStudy[]>(
+    `*[_type == "caseStudy"] | order(order asc) { _id, title, trade, icon, challenge, solution, result }`
+  )
