@@ -57,3 +57,19 @@ body {
 /* Glow utilities */
 .glow-yellow { box-shadow: 0 0 40px rgba(245,197,24,0.25), 0 0 80px rgba(245,197,24,0.10); }
 .glow-navy   { box-shadow: 0 0 40px rgba(27,58,92,0.20); }
+
+/* Scroll / decorative animations */
+@keyframes spin-slow    { to { transform: rotate(360deg); } }
+@keyframes spin-reverse { to { transform: rotate(-360deg); } }
+@keyframes float-y      { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-10px); } }
+
+.animate-spin-slow    { animation: spin-slow    16s linear infinite; will-change: transform; }
+.animate-spin-reverse { animation: spin-reverse 24s linear infinite; will-change: transform; }
+.animate-float-y      { animation: float-y       4s ease-in-out infinite; }
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-spin-slow,
+  .animate-spin-reverse,
+  .animate-float-y,
+  .animate-marquee { animation: none; }
+}
